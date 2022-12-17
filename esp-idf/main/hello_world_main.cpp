@@ -79,9 +79,8 @@ extern "C" void app_main(void) {
     disableCore0WDT();
 
     // Create mutex for application
-    applicationFinished = xSemaphoreCreateMutex();
-    // Take mutex (to be released by the application task)
-    xSemaphoreTake(applicationFinished, portMAX_DELAY); 
+    // Semaphore is created as taken
+    applicationFinished = xSemaphoreCreateBinary();
 
     // Create application task on core 0
     xTaskCreatePinnedToCore(run_application, "application", 4096, NULL, 1, NULL, 0);

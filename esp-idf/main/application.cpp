@@ -16,7 +16,7 @@ bool HelloWorldApplication::init() {
 }
 
 void HelloWorldApplication::run() {
-    int x = -1, y = -1;
+    int x = -1, y = -1, counter = 0;
     while (true) {
         x = random(0, M5EPD_PANEL_W - textWidth - 1);
         y = random(0, M5EPD_PANEL_H - textHeight - 1);
@@ -25,5 +25,9 @@ void HelloWorldApplication::run() {
         canvas->pushCanvas(x, y, UPDATE_MODE_NONE);
         M5.EPD.UpdateFull(UPDATE_MODE_GLR16);
         vTaskDelay(5 * (1000 / portTICK_PERIOD_MS));
+        counter++;
+        if (counter > 10) {
+            break;
+        }
     }
 }
